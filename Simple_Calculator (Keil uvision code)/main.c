@@ -14,7 +14,7 @@ void delay(unsigned char);
 void send_num(unsigned int);
 void calculate();
 unsigned int y, a = 0, b = 0;
-unsigned char operand, flag = 0;
+unsigned char operator, flag = 0;
 
 void main()
 {
@@ -80,7 +80,7 @@ void row_scan()
         {
             flag = 1;
             lcd_dat('/');
-            operand = '/';
+            operator = '/';
         }
     }
 
@@ -130,7 +130,7 @@ void row_scan()
         {
             flag = 1;
             lcd_dat('x');
-            operand = 'x';
+            operator = 'x';
         }
     }
 
@@ -180,7 +180,7 @@ void row_scan()
         {
             flag = 1;
             lcd_dat('-');
-            operand = '-';
+            operator = '-';
         }
     }
 
@@ -224,7 +224,7 @@ void row_scan()
         {
             flag = 1;
             lcd_dat('+');
-            operand = '+';
+            operator = '+';
         }
     }
 }
@@ -241,12 +241,12 @@ void delay(unsigned char t)
 void calculate()
 {
     lcd_cmd(0xc0);
-    if(operand == '+')
+    if(operator == '+')
     {
         send_num(a + b);
     }
 
-    if(operand == '-')
+    if(operator == '-')
     {
         if(a > b)
             send_num(a - b);
@@ -257,7 +257,7 @@ void calculate()
         }
     }
 
-    if(operand == '/')
+    if(operator == '/')
     {
         if(b != 0)
             send_num(a/b);
@@ -268,7 +268,7 @@ void calculate()
         }
     }
 
-    if(operand == 'x')
+    if(operator == 'x')
     {
         send_num(a*b);
     }
